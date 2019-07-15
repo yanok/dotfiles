@@ -1,0 +1,85 @@
+# set history to 100k lines
+set -g history-limit 100000
+
+# set window and pane index to 1 (0 by default)
+set-option -g base-index 1
+setw -g pane-base-index 1
+
+# renumber windows sequentially after closing any of them
+set -g renumber-windows on
+
+# Make things more responsive
+set -g repeat-time 0
+set -s escape-time 0
+
+# reload ~/.tmux.conf using PREFIX r
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+## add more convenient split shortcuts
+bind | split-window -h
+bind - split-window -v
+
+# set status bar
+set -g status-bg black
+set -g status-fg white
+set -g status-left-length 30
+set -g status-left '#[fg=green, bright]S: #S #[fg=black, bright]| #[fg=red, bright]H: #H'
+set -g status-right '#[fg=yellow,bg=default, bright] #(date +"%a %b %d, %H:%M")'
+set -g status-justify centre
+
+
+
+# Until we get proper string comparison, use this hack
+# Upstream issue: https://github.com/tmux/tmux/issues/1747
+# Hack source: https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
+
+# Version-specific commands [grumble, grumble]
+# See: https://github.com/tmux/tmux/blob/master/CHANGES
+# http://man7.org/linux/man-pages/man1/tmux.1.html#GLOBAL_AND_SESSION_ENVIRONMENT for 'setenv' usage
+run-shell "tmux setenv -g TMUX_VERSION $(tmux -V | cut -c 6-)"
+
+# window-status-current used to  set colors of active window
+# window-status- used to set the color of the window list
+# pane-active-border used to make active pane more distinct
+if-shell -b '[ "$(echo "$TMUX_VERSION < 2.9" | bc)" = 1 ]' " \
+setw   -g   window-status-current-bg     red           \
+setw   -g   window-status-current-fg     white         \
+setw   -g   window-status-current-attr   bright        \
+setw   -g   window-status-fg             cyan          \
+setw   -g   window-status-bg             default       \
+setw   -g   window-status-attr           bright        \
+set    -g   pane-active-border-fg        yellow        \
+set    -g   pane-active-border-bg        default "
+
+if-shell -b '[ "$(echo "$TMUX_VERSION >= 2.9" | bc)" = 1 ]' " \
+setw -g window-status-current-style bg=red,fg=white,bright \
+setw -g window-status-style fg=cyan,bg=default,bright \
+setw -g pane-active-border-style fg=yellow,bg=default "
+
+
+# Set window notifications
+setw -g monitor-activity on
+set -g visual-activity on
+
+
+# Rather than constraining window size to the maximum size of any client
+# connected to the *session*, constrain window size to the maximum size of any
+# client connected to *that window*. Much more reasonable.
+setw -g aggressive-resize on
+
+# disable autonaming of panes
+set-option -g allow-rename off
+
+# fixing scrolling issue
+set -g default-terminal screen-256color
+
+# New windows/pane in $PWD
+bind c new-window -c "#{pane_current_path}"
+
+# Fix mouse scrolling in scholl mode (Prefix+"[")
+bind -n WheelUpPane if-shell -Ft= '#{?pane_in_mode,1,#{mouse_any_flag}}' \
+        'send -Mt=' 'if-shell -Ft= "#{alternate_on}" \
+        "send -t= Up" "copy-mode -et="'
+bind -n WheelDownPane if-shell -Ft = '#{?pane_in_mode,1,#{mouse_any_flag}}' \
+        'send -Mt=' 'if-shell -Ft= "#{alternate_on}" \
+        "send -t= Down" "send -Mt="'

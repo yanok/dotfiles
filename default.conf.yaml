@@ -23,6 +23,7 @@
     ~/.nanorc: nano/nanorc
     ~/.taskrc: taskwarrior/taskrc
     ~/.tmux.conf: tmux/tmux.conf
+    ~/.tmux.conf.local: tmux/tmux-local.conf
     ~/.toprc : top/toprc
     ~/.vim/autoload: vim/autoload
     ~/.vim/templates: vim/templates
