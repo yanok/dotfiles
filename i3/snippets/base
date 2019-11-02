@@ -183,7 +183,14 @@ mode "$mode_system" {
 bindsym $mod+Shift+e mode "$mode_system"
 
 
+############ i3 gaps  ############### ################################
+for_window [class=".*"] border pixel 0 # note, then client.focused does not show indicator for focus.
 
+# Only enable gaps on a workspace when there is at least one container
+smart_gaps on
+
+# default gap of 10
+gaps inner 10
 
 ############ Status Bar and Run Menu  ################################
 
