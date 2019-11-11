@@ -1,6 +1,6 @@
 command: "/usr/local/bin/yabai -m query --spaces"
 
-refreshFrequency: 100
+refreshFrequency: 10000 # 100
 
 removeDuplicates: (ar) ->
   if ar.length == 0
@@ -14,6 +14,7 @@ generateIcons: (spaces) ->
   iconString = ""
   for display in displays
     for space in spaces when space['display'] == display
+      # iconString += "<li onclick=@run(\"say hi\") id=\"desktop#{space['index']}\">#{space['index']}</li>"
       iconString += "<li id=\"desktop#{space['index']}\">#{space['index']}</li>"
     if display < displays.length
       iconString += "<li>—</li>"
@@ -29,7 +30,36 @@ render: (output) ->
     </div>
   """
 
+# handleClick: (elem) ->
+#   console.log("handle click")
+#   console.log(elem)
+#   @run("say click")
+
+afterRender: (domEl) ->
+  console.log("after render")
+  #instanceMethods = (v for k, v of domEl when typeof v is "function")
+  #console.log(domEl)
+  #console.log(instanceMethods)
+  # $(":root").find("li").each() - in console.
+  # @run("say hi")
+  #console.log($(domEl).find('li'))
+  # $(domEl).on 'click', => @run("say hi")
+  $(domEl).find('li').on 'click', (event) =>
+    # console.log(event)
+    # console.log(event.target.innerText)
+    @run("say " + event.target.innerText)
+    @run("/usr/local/bin/yabai -m space --focus " + event.target.innerText)
+
+    # works!
+    # console.log(this)
+    # @handleClick(this)
+
+  # OLD
+  # $(domEl).find('li').on 'click', => @run("say hi @this")
+  # $(domEl).find('.li').on 'click', => @run("say hi" + this.val())
+
 style: """
+  user-select: none
   position: relative
   margin-top: 7px
   margin-left: 10px
