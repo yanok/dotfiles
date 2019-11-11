@@ -68,6 +68,7 @@ style: """
   font: 14px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
   color: #aaa
   font-weight: 700
+  z-index: 100
 
   ul
     list-style: none
