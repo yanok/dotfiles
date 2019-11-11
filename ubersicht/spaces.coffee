@@ -1,6 +1,6 @@
 command: "/usr/local/bin/yabai -m query --spaces"
 
-refreshFrequency: 10000 # 100
+refreshFrequency: 100
 
 removeDuplicates: (ar) ->
   if ar.length == 0
@@ -41,12 +41,14 @@ afterRender: (domEl) ->
   #console.log(domEl)
   #console.log(instanceMethods)
   # $(":root").find("li").each() - in console.
+  # $(":root").find("li")[1].click()
   # @run("say hi")
   #console.log($(domEl).find('li'))
   # $(domEl).on 'click', => @run("say hi")
   $(domEl).find('li').on 'click', (event) =>
     # console.log(event)
     # console.log(event.target.innerText)
+    # console.log("click")
     @run("say " + event.target.innerText)
     @run("/usr/local/bin/yabai -m space --focus " + event.target.innerText)
 
