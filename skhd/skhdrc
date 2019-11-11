@@ -3,6 +3,11 @@ cmd - return : open -na /Applications/Utilities/Terminal.app
 # open wiki
 alt - z : chrome-cli open "https://smirnov.wiki" -n
 
+
+# fast switch
+ctrl - left: yabai -m space --focus prev
+ctrl - right: yabai -m space --focus next
+
 # focus window
 cmd - left : yabai -m window --focus west
 cmd - down : yabai -m window --focus south
