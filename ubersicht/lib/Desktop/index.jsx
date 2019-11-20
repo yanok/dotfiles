@@ -1,11 +1,27 @@
 import { container, arrow, arrowLight, content } from './style.jsx';
 
+import { run } from "uebersicht";
+
+const yabai = "/usr/local/bin/yabai";
 
 export const buttonClick = ({event}) => {
         console.log('Button was clicked!')
-  console.log(`event: ${event}`)
 }
 
+
+//https://github.com/benwr/barlioz/blob/master/widgets/workspaces.jsx
+function makeSwitcher(n) {
+  function swtch(e) {
+    let cmd = yabai + ' -m space --focus ' + n;
+    run(cmd);
+    console.log(cmd);
+    return false;
+  }
+  return swtch;
+}
+
+// This function manually sets the .left value to slide out divs
+// consider adding a param to this function that indicates we should render a divider.
 const renderDesktop = (d) => {
   let index = d.index;
   let visible = d.visible == 1;
@@ -24,12 +40,24 @@ const renderDesktop = (d) => {
       // TODO - do something cool if it's focused. maybe underline?
       // TODO - add click handlers (not SUPER needed...)
   return (
-      <span onClick={buttonClick}>
-        <div style={contentStyle}>
+      <span onClick={makeSwitcher(index)}>
+        <div style={contentStyle} onClick={makeSwitcher(index)}>
         {index}
         </div>
         <div style={arrowLightStyle}/>
         <div style={arrowStyle}/>
+      </span>
+  )
+}
+
+const renderDivider = () => {
+  return(
+      <span>
+        <div style={content}>
+        ...
+        </div>
+        <div style={arrowLight}/>
+        <div style={arrow}/>
       </span>
   )
 }
@@ -42,12 +70,20 @@ const render = ({output}) => {
   output = output.reverse();
 
   const desktops = [];
+  const desktop1 = output.filter(l => {return l.display == 1})
+  console.log(`desktop1 : ${desktop1}`)
+  console.log(`desktop1 len : ${desktop1.length}`)
+
   // for (let num = output.end; num >= output.start; --num) {
   for (let i = 0; i < output.length; i++) {
     // console.log(`i: ${i}, focused: ${output[i].focused}, type: ${typeof(output[i].focused)}`)
     desktops.push(renderDesktop(output[i]));
+    if (i + 1  == desktop1.length) {
+      console.log(`pushing divider, index ${i}`)
+      desktops.push(renderDivider());
+    }
   }
-  // console.log(`left data: ${desktops}`)
+  console.log(`left data: ${desktops}`)
 
   return (
     <div style={container}>
