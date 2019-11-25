@@ -23,18 +23,18 @@ const updateStyling = (batteryPercentage, isCharging) => {
   if (isCharging === true) {
     contentStyle.background = 'rgba(163, 189, 140, 1)';
     arrowStyle.borderRight = '10px solid rgba(163, 189, 140, 1)';
-  } else if (batteryPercentage < 100) {
-    contentStyle.background = 'rgba(163, 189, 140, 1)';
-    arrowStyle.borderRight = '10px solid rgba(163, 189, 140, 1)';
-  } else if (batteryPercentage < 60) {
-    contentStyle.background = 'rgba(235, 203, 139, 1)';
-    arrowStyle.borderRight = '10px solid rgba(235, 203, 139, 1)';
-  } else if (batteryPercentage < 40) {
-    contentStyle.background = 'rgba(208, 135, 113, 1)';
-    arrowStyle.borderRight = '10px solid rgba(208, 135, 113, 1)';
   } else if (batteryPercentage < 20) {
     contentStyle.background = 'rgba(191, 97, 106, 1)';
     arrowStyle.borderRight = '10px solid rgba(191, 97, 106, 1)';
+  } else if (batteryPercentage < 40) {
+    contentStyle.background = 'rgba(208, 135, 113, 1)';
+    arrowStyle.borderRight = '10px solid rgba(208, 135, 113, 1)';
+  } else if (batteryPercentage < 60) {
+    contentStyle.background = 'rgba(235, 203, 139, 1)';
+    arrowStyle.borderRight = '10px solid rgba(235, 203, 139, 1)';
+  } else if (batteryPercentage < 100) {
+    contentStyle.background = 'rgba(163, 189, 140, 1)';
+    arrowStyle.borderRight = '10px solid rgba(163, 189, 140, 1)';
   }
   return { contentStyle, arrowStyle };
 }
