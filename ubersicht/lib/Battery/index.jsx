@@ -49,7 +49,8 @@ const render = ({output}) => {
     <div style={container}>
       <div style={arrowStyle}/>
       <div style={contentStyle}>
-        <i class={iconClasses}/>&nbsp;{output.percentage}%
+          output.percentage
+        {/* <i class={iconClasses}/>&nbsp;{output.percentage}% */}
       </div>
     </div>
   )
