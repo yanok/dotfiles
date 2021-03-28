@@ -61,5 +61,9 @@ autoload -U compinit && compinit
 # As per instructions, load this last so that it wraps ZLE widgets.
 # source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# Install starship
+eval "$(starship init zsh)"
+
 # Load local config if present, for final overrides.
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+

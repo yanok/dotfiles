@@ -34,7 +34,7 @@ function vi_info(){
 local shell_symbol='$(vi_info)'
 
 # These next two local variables allow us to split the working directory
-# into two sections. This is useful if you have a common prefix that you 
+# into two sections. This is useful if you have a common prefix that you
 # work in, since on an 80 char wide screen real estate is valuable
 # The following implementation is a noop, and will act the same as
 # %~. However, in ~/.zshrc.local you can define `dir_head` and `dir_tail`
@@ -61,16 +61,16 @@ TRAPWINCH() {
   zle && { zle reset-prompt; zle -R }
 }
 
-# Force prompt redrawing during linit init hooks and on mode change.
-function zle-line-init zle-keymap-select {
-    export_prompt
-    zle reset-prompt
-    zle -R
-}
+# # Force prompt redrawing during linit init hooks and on mode change.
+# function zle-line-init zle-keymap-select {
+#     export_prompt
+#     zle reset-prompt
+#     zle -R
+# }
 
 # register ZLE hooks
-zle -N zle-line-init
-zle -N zle-keymap-select
+# zle -N zle-line-init
+# zle -N zle-keymap-select
 
 
 # Resources: http://www.nparikh.org/unix/prompt.php
@@ -78,7 +78,7 @@ function export_prompt(){
 load_dir_injections
 # Prompt format:
 #
-# PRIVILEGES USER @ MACHINE in DIRECTORY on git:BRANCH STATE 
+# PRIVILEGES USER @ MACHINE in DIRECTORY on git:BRANCH STATE
 # $ COMMAND
 #
 # For example:
