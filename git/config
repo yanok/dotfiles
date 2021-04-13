@@ -5,8 +5,8 @@
 #------------------------------------------------------------------------------------------#
 
 [user]
-	name = Ivan Smirnov
-	email = isgsmirnov@gmail.com
+	name = Ilya Yanok
+	email = ilya.yanok@gmail.com
 
 [push]
     default = current
