@@ -4,11 +4,11 @@
       create: true
       force: true
 - clean: ['~']
-- shell:
-    - [skhd/generator.sh, "Generating skhd config"]
+# - shell:
+#     - [skhd/generator.sh, "Generating skhd config"]
 
 - link:
-    "~/Library/Application Support/Übersicht/widgets": ubersicht
+    # "~/Library/Application Support/Übersicht/widgets": ubersicht
     ~/.config/karabiner/karabiner.json: karabiner/karabiner.json
     ~/.skhdrc: skhd/skhdrc.generated
     ~/.yabairc: yabai/yabairc
