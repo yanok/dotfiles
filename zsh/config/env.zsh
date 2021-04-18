@@ -16,8 +16,10 @@ elif [[ $OSTYPE == darwin* ]]; then
 fi
 
 # Customize github.com/djui/alias-tips
+export ZSH_PLUGINS_ALIAS_TIPS_TEXT="💡 $fg[magenta]Alias tip: "
 export ZSH_PLUGINS_ALIAS_TIPS_REVEAL=1
-export ZSH_PLUGINS_ALIAS_TIPS_REVEAL_EXCLUDES="(_ ll vi)"
+export ZSH_PLUGINS_ALIAS_TIPS_REVEAL_TEXT="$fg[cyan]Alias for: "
+export ZSH_PLUGINS_ALIAS_TIPS_REVEAL_EXCLUDES="(_ ls ll vi)"
 
 # XDG config location
 export XDG_CONFIG_HOME="$HOME/.config"
