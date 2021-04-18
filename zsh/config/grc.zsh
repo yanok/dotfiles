@@ -6,7 +6,8 @@ _grc_injector(){
         local f
 	for f in $(ls ~/.dotfiles/grc/conf*); do
 	    local prog=${f:e}
-        if [[ "$BUFFER" =~ "(^|[/\w\.]+/|sudo\s+)$prog(\s|$)" && ! "$BUFFER" =~ "grcat conf*" ]]; then
+        if [[ "$BUFFER" =~ "^[[:space:]]*([-/._[:alnum:]]+/|(_|sudo)[[:space:]]+)?$prog([[:space:]]|$)" \
+            && ! "$BUFFER" =~ "grcat conf*" ]]; then
 		BUFFER=$BUFFER" | grcat conf.$prog"
 		break
 	    fi
