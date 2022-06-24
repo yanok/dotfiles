@@ -8,6 +8,9 @@ export TERM=xterm-256color
 export EDITOR=vim
 export VISUAL=vim # editor for crontab
 
+# Otherwise hg diff/xl waits for exit even if output fits one screen
+export PAGER="less -RF"
+
 # OS-dependent locations
 if [[ $OSTYPE == 'linux-gnu' ]]; then
 	ANSIBLE_ROLES_PATH='/etc/ansible'
