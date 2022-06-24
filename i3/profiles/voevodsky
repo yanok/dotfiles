@@ -1,0 +1,2 @@
+snippets=(carbon gnome)
+source $ROOT/profiles/_builder
