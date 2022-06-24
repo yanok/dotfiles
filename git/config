@@ -15,12 +15,13 @@
 
 [init]
 	templatedir = ~/.dotfiles/git/template
+	defaultBranch = master
 
 [core]
     whitespace = trailing-space,space-before-tab
     excludesfile = ~/.dotfiles/git/ignore
     editor = vim
-    pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = delta
 
 #------------------------------------------------------------#
 # Less common config, will likely remain the same for years.
@@ -31,6 +32,7 @@
 	pushNonFastForward = false
 
 # source: https://blog.scottnonnenberg.com/better-git-configuration/
+# Guide: https://diamantidis.github.io/2018/11/10/save-time-with-git-aliases
 [alias]
     prune = fetch --prune
     undo = reset --soft HEAD^
@@ -42,10 +44,11 @@
     popwip = !git log -1 --pretty=%B | grep -q '^wip$' && git reset HEAD^ || echo 'HEAD is not a wip commit'
     pt = !git tag -l | xargs git tag -d && git fetch -t # prune tags.
 
+    rt = !git fetch origin tip:tip | git rebase tip
     unstage = reset HEAD --
     recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
     today = !git log --all --since=00:00:00 --oneline --no-merges --author=${1-$(git config user.email)}
-
+	alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
 
 [branch]
 	sort = authordate
@@ -90,13 +93,26 @@
 	branch = green bold
 	nobranch = red
 
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+
 [diff]
 	renames = copies
 	mnemonicprefix = true # [i]ndex, [w]ork tree, [c]ommit, [o]bject
 	tool = vimdiff
+    colorMoved = default
 
 [grep]
 	lineNumber = true
+
+[interactive]
+    diffFilter = delta --color-only
 
 [merge]
     stat = true
@@ -143,3 +159,10 @@
 # Allow local customizations in the .gitconfig_local file
 [include]
 	path = ~/.gitconfig_local
+[merge "ours"]
+	driver = true
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

@@ -6,7 +6,7 @@
 if [[ $OSTYPE == linux-* ]]; then
   export FZF_PREFIX=/opt
 elif [[ $OSTYPE == darwin* ]]; then
-  export FZF_PREFIX=/usr/local/opt
+  export FZF_PREFIX=/opt/homebrew/opt
 else
   # FZF not available
   return 0
@@ -28,7 +28,7 @@ else
 fi
 
 # Set FZF fzf-file-widget to use the same options
-# Other available overrides: 
+# Other available overrides:
 # fzf-file-widget: FZF_CTRL_T_COMMAND, FZF_CTRL_T_OPTS
 # fzf-cd-widget: FZF_ALT_C_COMMAND, FZF_ALT_C_OPTS
 # fzf-history-widget: FZF_CTRL_R_OPTS
@@ -37,8 +37,8 @@ export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 # Auto-completion
 [[ $- == *i* ]] && source "$FZF_PREFIX/fzf/shell/completion.zsh" 2> /dev/null
 
-# Key bindings
-source "$FZF_PREFIX/fzf/shell/key-bindings.zsh"
+# Load Key bindings. Fallback to load alpine keybinds
+source "$FZF_PREFIX/fzf/shell/key-bindings.zsh" || source "/usr/share/fzf/key-bindings.zsh"
 
 # better zz from fasd
 # TODO convert to Z
@@ -173,3 +173,7 @@ s(){
   local line="$(echo $full | awk -F: '{print $2}')"
   [ -n "$file" ] && vim "$file" +$line
 }
+
+# If you want other awesome navigation shortcuts, check out:
+# https://github.com/agkozak/zsh-z
+# It's one of my most used commands.

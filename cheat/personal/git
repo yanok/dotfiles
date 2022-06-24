@@ -2,7 +2,7 @@
 git commit --amend
 
 # To stage last commit
-git reset HEAD~ 
+git reset HEAD~
 
 # To remove untracked files
 git clean -f -d
@@ -56,6 +56,7 @@ git show :/cool
 
 # Undo parts of last commit in a specific file
 git checkout -p HEAD^ -- /path/to/file
+git restore --source=MY_BRNACH -- /path/to/file
 
 # Reset git repo into one commit
 git reset $(git commit-tree HEAD^{tree} -m "message here")
@@ -81,3 +82,23 @@ git checkout @{two.days.ago}
 
 # More hints
 https://devhints.io/git-log
+
+# Count line deltas
+git log --numstat --pretty="%H" --author="Ivan Smirnov" old_commit..HEAD | awk 'NF==3 {plus+=$1; minus+=$2} END {printf("+%d, -%d\n", plus, minus)}'
+git log --shortstat --since "10 days ago"  | grep "files changed" | awk '{files+=$1; inserted+=$4; deleted+=$6} END {print "files changed", files, "lines inserted:", inserted, "lines deleted:", deleted}'
+
+
+# Create empty commit (useful for debugging triggers or CI/CD)
+git commit --allow-empty -m "Trigger CI CD"
+
+# View changed files
+git diff-tree -r --name-only --no-commit-id HEAD@{1} HEAD
+# Alternatively, you can use the standard syntax to diff named refs:
+git diff-tree -r --name-only --no-commit-id base myfeature
+
+## Monorepo sparse checkout
+git clone --no-checkout --filter=blob:none https://my.repo/monorepo.git
+cd monorepo
+git sparse-checkout init --cone
+git sparse-checkout set /mypath/ /some/other/path/
+git read-tree -mu HEAD

@@ -14,13 +14,18 @@ elif [[ $OSTYPE == darwin* ]]; then
 fi
 
 # additional autocompletions
-fpath=($HOME/.dotfiles/zsh/config/fpath /usr/local/share/zsh/site-functions /usr/share/zsh/vendor-completions $fpath)
+fpath=($HOME/.dotfiles/zsh/config/fpath /opt/homebrew/share/zsh/site-functions /usr/local/share/zsh/site-functions /usr/share/zsh/vendor-completions $fpath)
 
 # Go Definitions
 export GOPATH=$HOME/go
 GOLANG_BIN="/usr/local/go/bin:/usr/lib/go/bin"
 
+# Ubuntu Snaps are installed to /snap/bin symlinks
+SNAP_BIN="/snap/bin"
 
+
+# Homebrew 3.0
+BREW="/opt/homebrew/bin"
 # Check for symlinks to directories in bin and
 # append them to the path. This is useful when linking in
 # a suite such as flutter or android SDK.
@@ -31,6 +36,7 @@ for elem in $USER_BIN/*; do
         USER_BIN=$USER_BIN:$elem
     fi
 done
+unset elem
 
 # export final result
-export PATH="$USER_BIN:$DOT_BIN:$GOPATH/bin:$PYTHON:$TEX:$GOPATH/bin:$GOLANG_BIN:$FZF_PREFIX/fzf/bin:$SYSTEM"
+export PATH="$USER_BIN:$DOT_BIN:$GOPATH/bin:$BREW:$SNAP_BIN:$PYTHON:$TEX:$GOPATH/bin:$GOLANG_BIN:$FZF_PREFIX/fzf/bin:$SYSTEM"
