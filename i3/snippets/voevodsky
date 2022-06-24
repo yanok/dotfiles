@@ -1,9 +1,12 @@
-### carbon config ###
+### voevodsky config ###
 
 # monitor layout is [1][2]
 set $left DP-4.8
 set $right DP-6
 exec xrandr --output $left --pos 0x640 --output $right --rotate right --pos 2560x0
+
+# Use Caps as Ctrl
+exec setxkbmap -option "ctrl:nocaps"
 
 # workspace layout
 workspace 1 output $left
