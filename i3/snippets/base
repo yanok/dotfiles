@@ -39,7 +39,7 @@ mouse_warping none
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
-        set $interval 30
+        set $interval 10
         # Pressing left will shrink the window’s width.
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
