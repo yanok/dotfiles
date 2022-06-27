@@ -26,6 +26,12 @@ client.focused_inactive #333333  #5f676a  $white   #484e50
 client.unfocused        #333333  #222222  #aaaaaa  #292d2e
 client.urgent           $purple  $red     $gold    $gold
 
+# Show thick borders for PWAs, otherwise it's hard to find focused one
+for_window [class="Google-chrome"] border pixel 4
+# But keep the default title for the non-app Chrome windows
+for_window [instance="google-chrome"] border normal
+# Hide thick borders if the PWA is alone in workspace (Cider)
+hide_edge_borders smart
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
