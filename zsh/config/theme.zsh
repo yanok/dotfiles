@@ -19,6 +19,13 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="$YS_VCS_PROMPT_SUFFIX"
 ZSH_THEME_GIT_PROMPT_DIRTY="$YS_VCS_PROMPT_DIRTY"
 ZSH_THEME_GIT_PROMPT_CLEAN="$YS_VCS_PROMPT_CLEAN"
 
+# HG info
+local hg_info='$(hg_prompt_info)'
+ZSH_THEME_HG_PROMPT_PREFIX="${YS_VCS_PROMPT_PREFIX1}${YS_VCS_PROMPT_PREFIX2}"
+ZSH_THEME_HG_PROMPT_SUFFIX="$YS_VCS_PROMPT_SUFFIX"
+ZSH_THEME_HG_PROMPT_DIRTY="$YS_VCS_PROMPT_DIRTY"
+ZSH_THEME_HG_PROMPT_CLEAN="$YS_VCS_PROMPT_CLEAN"
+
 local exit_code="%(?,,C:%{$fg[red]%}%?%{$reset_color%})"
 
 # Hint: use print -P 'text' to preview prompts without reloading
@@ -34,7 +41,7 @@ function vi_info(){
 local shell_symbol='$(vi_info)'
 
 # These next two local variables allow us to split the working directory
-# into two sections. This is useful if you have a common prefix that you 
+# into two sections. This is useful if you have a common prefix that you
 # work in, since on an 80 char wide screen real estate is valuable
 # The following implementation is a noop, and will act the same as
 # %~. However, in ~/.zshrc.local you can define `dir_head` and `dir_tail`
@@ -78,7 +85,7 @@ function export_prompt(){
 load_dir_injections
 # Prompt format:
 #
-# PRIVILEGES USER @ MACHINE in DIRECTORY on git:BRANCH STATE 
+# PRIVILEGES USER @ MACHINE in DIRECTORY on git:BRANCH STATE
 # $ COMMAND
 #
 # For example:
@@ -94,7 +101,7 @@ export PROMPT="
 %{$fg[white]%}in \
 %{$terminfo[bold]$fg[red]%}${dir_head_disp}\
 %{$terminfo[bold]$fg[yellow]%}${dir_tail_disp}%{$reset_color%}\
-${git_info}\
+${git_info}${hg_info}\
  \
 %{$fg[white]%}%{$reset_color%}
 ${shell_symbol}"
