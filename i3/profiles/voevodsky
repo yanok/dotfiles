@@ -1,2 +1,2 @@
-snippets=(carbon gnome)
+snippets=(voevodsky gnome)
 source $ROOT/profiles/_builder
