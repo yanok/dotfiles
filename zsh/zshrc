@@ -17,6 +17,9 @@
 #
 # Note: ZSH seems to read ~/.profile as well, if ~/.zshrc is not present.
 
+# disable async prompt
+zstyle ':omz:alpha:lib:git' async-prompt no
+
 ####################################################
 # Load github.com/tarjoilija/zgen and initialize it.
 source "${HOME}/.dotfiles/zsh/zgen/zgen.zsh"
