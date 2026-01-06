@@ -17,3 +17,4 @@
     ~/Library/Fonts/FiraCode-VariableFont_wght.ttf: fonts/FiraCode-VariableFont_wght.ttf
     ~/Library/Preferences/espanso: espanso
     ~/bin/lock: bin/osx_lock
+    ~/Library/Application Support/com.mitchellh.ghostty/config: ghostty/config
