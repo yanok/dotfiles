@@ -14,5 +14,6 @@
     ~/.yabairc: yabai/yabairc
     ~/Library/Fonts/Inconsolata-Regular.ttf: fonts/Inconsolata-Regular.ttf
     ~/Library/Fonts/SourceCodePro-Regular.ttf: fonts/SourceCodePro-Regular.ttf
+    ~/Library/Fonts/FiraCode-VariableFont_wght.ttf: fonts/FiraCode-VariableFont_wght.ttf
     ~/Library/Preferences/espanso: espanso
     ~/bin/lock: bin/osx_lock
