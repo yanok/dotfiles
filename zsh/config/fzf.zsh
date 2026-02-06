@@ -166,15 +166,15 @@ cd..(){
 #  - the $ext extraction uses a ZSH specific text globber
 s(){
   local margin=5 # number of lines above and below search result.
-  local preview_cmd='search={};file=$(echo $search | cut -d':' -f 1 );'
+  local preview_cmd='search=$(echo {} | head -1);file=$(echo $search | cut -d':' -f 1 );'
   preview_cmd+="margin=$margin;" # Inject value into scope.
   preview_cmd+='line=$(echo $search | cut -d':' -f 2 );'
   preview_cmd+='tail -n +$(( $(( $line - $margin )) > 0 ? $(($line-$margin)) : 0)) $file | head -n $(($margin*2+1)) |'
   preview_cmd+='bat --paging=never --color=always --style=full --file-name $file --highlight-line $(($margin+1))'
   local full=$(ag "$*" \
     | fzf --select-1 --exit-0 --preview-window up:$(($margin*2+1)) --height=60%  --preview $preview_cmd)
-  local file="$(echo $full | awk -F: '{print $1}')"
-  local line="$(echo $full | awk -F: '{print $2}')"
+  local file="$(echo $full | head -1 | awk -F: '{print $1}')"
+  local line="$(echo $full | head -1 | awk -F: '{print $2}')"
   [ -n "$file" ] && vim "$file" +$line
 }
 
