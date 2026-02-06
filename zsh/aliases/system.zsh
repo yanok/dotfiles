@@ -37,11 +37,11 @@ if [[ $OSTYPE == linux-* ]]; then
         alias upgrade='apk upgrade'
         alias ins='apk add'
         alias rem='apk del'
-    elif [[ $OSNAME == centos ]]; then
-        alias update='sudo yum update'
-        alias upgrade='sudo yum upgrade'
-        alias ins='sudo yum install'
-        alias rem='sudo yum erase'
+    elif [[ $OSNAME == centos || $OSNAME == fedora ]]; then
+        alias update='sudo dnf update'
+        alias upgrade='sudo dnf upgrade'
+        alias ins='sudo dnf install'
+        alias rem='sudo dnf erase'
     else
         echo "OS type not known, system.zsh will not load some common aliases"
     fi
