@@ -4,7 +4,11 @@
 
 # Set install dir
 if [[ $OSTYPE == linux-* ]]; then
-  export FZF_PREFIX=/opt
+  if [ -d /opt/fzf ]; then
+    export FZF_PREFIX=/opt
+  else
+    export FZF_PREFIX=/usr/share
+  fi
 elif [[ $OSTYPE == darwin* ]]; then
   export FZF_PREFIX=/opt/homebrew/opt
 else
