@@ -92,7 +92,7 @@ function vfl() {
 function vaf(){
   if [ !  "$*" ]; then
     echo "Usage: $0 search_term"
-    exit 1
+    return 1
   fi
   local file
   file=$(ag -U $* | fzf --select-1 | cut -d':' -f -2)
