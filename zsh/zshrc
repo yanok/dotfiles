@@ -52,7 +52,7 @@ if ! zgen saved; then
 fi
 
 # Enable all completions
-autoload -U compinit && compinit
+autoload -U compinit && compinit -d ~/.zcompdump-${HOST}-${ZSH_VERSION}
 
 ########################################################
 # Load custom config last, so it can override plugins ##
